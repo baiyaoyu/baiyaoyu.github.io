@@ -14,7 +14,7 @@
     <meta name="description" content="纸上得来终觉浅，绝知此事要躬行。,遗传算法求解二元函数最值
 1.解析式分析
 
-&amp;lt;img src=”./img/fun.jpg”width=450px&amp;gt;
+&amp;lt;img src=”/img/fun.jpg”width=450px&amp;gt;
 
 
 
@@ -24,7 +24,7 @@
 范围[-10,10]
 周期函数
 
-2.遗传,"> 
+2.遗传算,"> 
     <meta name="author" content="潜伏的喵星人"> 
     <link rel="alternative" href="atom.xml" title="喵星人的hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -66,7 +66,7 @@
             <p></p><h1>遗传算法求解二元函数最值<p></p>
 <h2>1.解析式分析</h2>
 
-<center>&lt;img src=”./img/fun.jpg”width=450px&gt;</center>
+<center>&lt;img src=”/img/fun.jpg”width=450px&gt;</center>
 
 <font size="4">
 
@@ -96,12 +96,12 @@
 </ul>
 <p>以上几点很重要，前两点产生新的类型，虽然不定向变异，但有机会产生更优的答案。而第三点，隐含了启发式信息。结合进化学说中的观点，可知，应选择一定数量的个体来模拟进化（种群为单位）。</p>
 <p><em>遗传算法解决问题的一般思路</em></p>
-<center><img src="./img/pro.jpg" width="600px"></center>
+<center><img src="/img/pro.jpg" width="600px"></center>
 
 <h2>3.编程实现</h2><br>语言：python<br><br>版本：v3.6.0<br><br>库：math copy numpy matplotlib<br><br>主要函数：<br><br>1. 编码函数Encode()<br>2. 解码函数Decode()<br>3. 变异函数getChange()<br>4. 交叉函数getSwap()<br>5. 产生子代getNextGen()<br><br>编码方式分类<br><br>1. 二进制编码<br>2. 格雷码编码<br>3. 浮点数编码<br>4. 排列编码<br><br>本程序采用二进制编码，将两个自变量的取值精确到0.01（1/1024）,用22位二进制编码变量。编码基因型使得交叉和变异变得容易模拟，只需模拟某一位的编码的改变或互换即可模拟表现型的改变。<br><br>子代个体产生方法<br><br>1. 轮盘赌选择法<br>2. 随即遍历抽样<br>3. 锦标赛算法<br><br>适应度评估是通过函数的值的大小来评估，然而此函数的值中有负数的存在。轮盘赌算法不适用，本程序采用将适应度统一增加225。当然也有其他的解决思路，可以采用锦标赛方法产生后续个体，这种方法类似于有放回的摸球方法。<br><br><h2>4.结果分析及总结</h2>
 
 
-<center>&lt;img src=”./img/figure.png “width=500px&gt;</center>
+<center>&lt;img src=”/img/figure.png “width=500px&gt;</center>
 
 <p>其中绿点表示本次求的的最值。</p>
 <p><em>结果分析</em></p>
