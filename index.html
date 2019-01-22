@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-遗传算法求解二元函数极值" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/22/遗传算法求解二元函数极值/" class="article-date">
+  <time datetime="2019-01-22T01:25:05.958Z" itemprop="datePublished">2019-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p></p><h1>遗传算法求解二元函数最值<p></p>
+<h2>1.解析式分析</h2>
+
+<center>&lt;img src=”./img/fun.jpg”width=450px&gt;</center>
+
+<font size="4">
+
+<p><em>特点</em></p>
+<ul>
+<li>两个自变量</li>
+<li>范围[-10,10]</li>
+<li>周期函数</li>
+</ul>
+<h2>2.遗传算法解析</h2>
+
+<blockquote>
+<p>遗传算法（Genetic Algorithm）是模拟达尔文生物进化论的自然选择和遗传学机理的生物进化过程的计算模型，是一种通过模拟自然进化过程搜索最优解的方法。（百度百科）</p>
+</blockquote>
+<p><em>进化学说的一些观点</em></p>
+<ol>
+<li>进化以中群为单位</li>
+<li>自然选择决定进化的方向</li>
+<li>变异具有不确定性</li>
+<li>变异为进化提供原材料</li>
+</ol>
+<p>遗传算法需要模拟进化中的几个过程</p>
+<ul>
+<li>可能发生交叉互换。</li>
+<li>可能产生基因突变。</li>
+<li>每个个体具有不同的个体差异，产生子代的概率不同，模拟自然选择。</li>
+</ul>
+<p>以上几点很重要，前两点产生新的类型，虽然不定向变异，但有机会产生更优的答案。而第三点，隐含了启发式信息。结合进化学说中的观点，可知，应选择一定数量的个体来模拟进化（种群为单位）。</p>
+<p><em>遗传算法解决问题的一般思路</em></p>
+<center><img src="./img/pro.jpg" width="600px"></center>
+
+<h2>3.编程实现</h2><br>语言：python<br><br>版本：v3.6.0<br><br>库：math copy numpy matplotlib<br><br>主要函数：<br><br>1. 编码函数Encode()<br>2. 解码函数Decode()<br>3. 变异函数getChange()<br>4. 交叉函数getSwap()<br>5. 产生子代getNextGen()<br><br>编码方式分类<br><br>1. 二进制编码<br>2. 格雷码编码<br>3. 浮点数编码<br>4. 排列编码<br><br>本程序采用二进制编码，将两个自变量的取值精确到0.01（1/1024）,用22位二进制编码变量。编码基因型使得交叉和变异变得容易模拟，只需模拟某一位的编码的改变或互换即可模拟表现型的改变。<br><br>子代个体产生方法<br><br>1. 轮盘赌选择法<br>2. 随即遍历抽样<br>3. 锦标赛算法<br><br>适应度评估是通过函数的值的大小来评估，然而此函数的值中有负数的存在。轮盘赌算法不适用，本程序采用将适应度统一增加225。当然也有其他的解决思路，可以采用锦标赛方法产生后续个体，这种方法类似于有放回的摸球方法。<br><br><h2>4.结果分析及总结</h2>
+
+
+<center>&lt;img src=”./img/figure.png “width=500px&gt;</center>
+
+<p>其中绿点表示本次求的的最值。</p>
+<p><em>结果分析</em></p>
+<ul>
+<li>量化导致的误差，因为，量化精度为1/1024。分析此函数的连续性和周期性可得出，取得最值的点的位置相对于量化点的位置不一定完全一样，所以导致程序求的不同峰值的最优解不相同。</li>
+<li>进化压力偏大可能导致种群进化到某一个较低的极值点位置而不易变异到更高的最值处。所以应控制进化压力的大小在一个合适的范围。</li>
+</ul>
+<p><em>总结</em></p>
+<p>使用遗传算法求解函数极值的方法还是比较得心应手的。通过本次作业，了解到算法对于程序的重要意义，也发现自己本身所欠缺的正是这种算法的积累。</p>
+<p>在编程中学到的一些python的知识点现总结如下</p>
+<ol>
+<li>numpy中的数组与python中的列表不是一种数据结构</li>
+<li>深复制与浅复制，python直接将该数组中的值赋值添加到其他列表属于浅复制。修改其中一个，另一个仍会修改。</li>
+<li>matplotlib库，数据可视化，可轻松画出美观的图像，是便于理解数据规律的好工具。</li>
+</ol>
+</font></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/22/遗传算法求解二元函数极值/" data-id="cjr73ct3b0001hwvvu7lrmen9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/22/hello-world/" class="article-date">
+  <time datetime="2019-01-22T00:51:48.945Z" itemprop="datePublished">2019-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/22/hello-world/" data-id="cjr73ct2z0000hwvvrx04krmo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/22/遗传算法求解二元函数极值/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
