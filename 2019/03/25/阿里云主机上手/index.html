@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>喵星人的hexo - 个人博客</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="纸上得来终觉浅，绝知此事要躬行。,阿里云主机简单上手总结申请轻量级主机这里不过多介绍，我选择的轻量级应用服务器，因为在校生的关系会有很大的优惠，每月不到10元极其的划算。操作系统的话，我经常使用的是CentOS 7。
+第一次登陆的时,"> 
+    <meta name="author" content="潜伏的喵星人"> 
+    <link rel="alternative" href="atom.xml" title="喵星人的hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle"></h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title"></h1>
+        <div class="stuff">
+            <span>三月 25, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="阿里云主机简单上手总结"><a href="#阿里云主机简单上手总结" class="headerlink" title="阿里云主机简单上手总结"></a>阿里云主机简单上手总结</h1><h2 id="申请轻量级主机"><a href="#申请轻量级主机" class="headerlink" title="申请轻量级主机"></a>申请轻量级主机</h2><p>这里不过多介绍，我选择的轻量级应用服务器，因为在校生的关系会有很大的优惠，每月不到10元极其的划算。操作系统的话，我经常使用的是CentOS 7。</p>
+<p>第一次登陆的时候，往往需要先自行设置密码。阿里云的web管理平台做的挺好用的吧，这里就不多介绍了，仅附上一个截图好啦。</p>
+<p><img src="E:\待发布\img\aliyun.jpg" alt="alt 阿里云管理控制台"></p>
+<h2 id="SSH免密登陆"><a href="#SSH免密登陆" class="headerlink" title="SSH免密登陆"></a>SSH免密登陆</h2><p>设置密码后自然可以通过密码登陆。一般支持SSH协议的shell有很多。比如Xshell、PuTTY、甚至可以用windows的命令提示符。我是用的是win环境下的Git bash。  </p>
+<p><img src="E:\待发布\img\ssh.jpg" alt="alt ssh"></p>
+<p>相信各位已经看到了我已经配置了密钥登陆，一会我会展示如何配置。（其实是相当简单的）</p>
+<details><br>  <summary>关于ssh</summary><br>  <p>ssh既secure sh<br><br>ell，shell是沟通操作系统内核和用户的桥梁，在熟练掌握的情况下，shell命令行的效率远远高于图形化界面。我想在大神手中GUI估计就是华而不实的一种存在吧。奈何自己水平太菜，写写博文，也不为别人观赏，意在自我提高吧。</p><br>    <p>这里的secure shell其实就是一种NVT(网络虚拟终端)，当年计算机网络名词解释NVT竟然没答上来，实在不该。哈哈。</p><br></details>
+
+<details><br>    <summary>ssh与telnet对比</summary><br>    <ol><br>        <li> Telnet是电信(Telecommunications)和网络(Networks)的联合缩写，这是一种在UNIX平台上最为人所熟知的网络协议。 SSH代表安全外壳(Secure Shell)，它现在是通过互联网访问网络设备和服务器的唯一的主要协议。</li><br>        <li>Telnet使用端口23，它是专门为局域网设计的。SSH默认情况下通过端口22运行;不过，很容易更改这个端口。</li><br>        <li> Telnet不是一种安全通信协议，因为它并不使用任何安全机制，通过网络/互联网传输明文格式的数据，包括密码，所以谁都能嗅探数据包，获得这个重要信息。SSH是一种非常安全的协议，因为它共享并发送经过加密的信息，从而为通过互联网等不安全的网络访问的数据提供了机密性和安全性。一旦通讯的数据使用SSH经过加密，就极难解压和读取该数据，所以我们的密码在公共网络上传输也变得很安全。</li><br>        <li>Telnet中没有使用任何验证策略及数据加密方法，因而带来了巨大的安全威胁，这就是为什么telnet不再用于通过公共网络访问网络设备和服务器。一旦通讯的数据使用SSH经过加密，就极难解压和读取该数据，所以我们的密码在公共网络上传输也变得很安全。</li><br>    </ol><br>    <p><br>        其实有很多协议都有了基于非对称密钥机制加密的改进或新协议的替代。<br>        比如：<br>            除ssh之于telnet之外，还有SCP之于FTP,HTTPS之于HTTP.<br>    </p><br></details>
+
+<details><br>    <summary>非对称密钥机制(暂未更新)</summary><br></details>
+
+
+
+<p>下面正式介绍，如何在轻量级应用服务器上配置密钥登陆。如果使用密码登陆只需要下面的一条语句。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.1.5</span><br><span class="line"><span class="meta">#</span><span class="bash">然后输入密码登陆即可</span></span><br></pre></td></tr></table></figure>
+<p>首先生成一公私密钥对。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/test</span><br><span class="line"><span class="meta">#</span><span class="bash">参数t指定密钥类型</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-f指定文件目录以及文件名。~指代当前用户的文件夹</span></span><br></pre></td></tr></table></figure>
+<p>然后在对应的目录里既可以看到生成的密钥文件。</p>
+<p><img src="E:\待发布\img\ssh-keygen.jpg" alt="alt ssh-keygen"></p>
+<p>下面要做的就是将生成的公钥拷贝到远程主机上对应文件夹里。不管是使用winSCP还是直接复制输入均可。在ssh服务配置文件里有一项条目如下（该文件目录/etc/ssh/sshd_config）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> but this is overridden so installations will only check .ssh/authorized_keys</span></span><br><span class="line">AuthorizedKeysFile      .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<p>很显然上面这一条目规定了公钥要输入的文件。如果有多个公钥依次输入到这个文件里。可以scp工具覆盖，也可以用vim编辑文件。这里暂时不介绍vim怎么使用了。</p>
+<p>sshd_config里其他的条目我也不是很清楚。但再简单介绍一个。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line"><span class="meta">#</span><span class="bash">这一项就是关于密码认证的配置 这里选no既可以禁止密码登陆了。</span></span><br></pre></td></tr></table></figure>
+<p>当然还有很多其他配置条目，比如禁用root登陆的选项等等。这里不过多说明了。</p>
+<p>配置上述两项后即可直接使用密钥登陆，不需输入密码，而且安全性比密码登陆也提高了许多。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
