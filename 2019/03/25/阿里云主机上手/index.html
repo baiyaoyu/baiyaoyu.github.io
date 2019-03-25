@@ -66,16 +66,16 @@
 
 
 <p>下面正式介绍，如何在轻量级应用服务器上配置密钥登陆。如果使用密码登陆只需要下面的一条语句。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.1.5</span><br><span class="line"><span class="meta">#</span><span class="bash">然后输入密码登陆即可</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.1.5</span><br><span class="line"><span class="meta">#</span>然后输入密码登陆即可</span><br></pre></td></tr></table></figure>
 <p>首先生成一公私密钥对。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/test</span><br><span class="line"><span class="meta">#</span><span class="bash">参数t指定密钥类型</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-f指定文件目录以及文件名。~指代当前用户的文件夹</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/test</span><br><span class="line"><span class="meta">#</span>参数t指定密钥类型</span><br><span class="line"><span class="meta">#</span>-f指定文件目录以及文件名。~指代当前用户的文件夹</span><br></pre></td></tr></table></figure>
 <p>然后在对应的目录里既可以看到生成的密钥文件。</p>
 <p><img src="E:\待发布\img\ssh-keygen.jpg" alt="alt ssh-keygen"></p>
 <p>下面要做的就是将生成的公钥拷贝到远程主机上对应文件夹里。不管是使用winSCP还是直接复制输入均可。在ssh服务配置文件里有一项条目如下（该文件目录/etc/ssh/sshd_config）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> but this is overridden so installations will only check .ssh/authorized_keys</span></span><br><span class="line">AuthorizedKeysFile      .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2</span><br><span class="line"><span class="meta">#</span> but this is overridden so installations will only check .ssh/authorized_keys</span><br><span class="line">AuthorizedKeysFile      .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 <p>很显然上面这一条目规定了公钥要输入的文件。如果有多个公钥依次输入到这个文件里。可以scp工具覆盖，也可以用vim编辑文件。这里暂时不介绍vim怎么使用了。</p>
 <p>sshd_config里其他的条目我也不是很清楚。但再简单介绍一个。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line"><span class="meta">#</span><span class="bash">这一项就是关于密码认证的配置 这里选no既可以禁止密码登陆了。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line"><span class="meta">#</span>这一项就是关于密码认证的配置 这里选no既可以禁止密码登陆了。</span><br></pre></td></tr></table></figure>
 <p>当然还有很多其他配置条目，比如禁用root登陆的选项等等。这里不过多说明了。</p>
 <p>配置上述两项后即可直接使用密钥登陆，不需输入密码，而且安全性比密码登陆也提高了许多。</p>
 
